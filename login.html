@@ -1,0 +1,92 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="materialize.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>ZP Sys. | Login</title>
+</head>
+
+<body>
+
+    <div class="row">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo right">Logo</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="tela_inicial.html">Início</a></li>
+                    <li><a href="relatorio_salas.html">Salas</a></li>
+                    <li><a href="reserva_sala.html">Reservar sala</a></li>
+                    <li><a href="relatorio_alunos.html">Alunos</a></li>
+                    <li><a href="relatorio_professores.html">Professores</a></li>
+                    <li><a href="cadastro_salas.html">Cadastre uma Sala</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <h3 class="center-align">Login</h3>
+
+        <hr>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">mail</i>
+                <input type="text" id="email">
+                <label for="email">e-mail</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">lock</i>
+                <input type="password" id="senha" class="validate">
+                <label for="senha">Senha</label>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s4">
+                <form action="#">
+                    <p>
+                        <label>
+                            <input name="group1" type="radio" id="aluno" />
+                            <span>Sou Aluno</span>
+                        </label>
+
+                    <p>
+                        <label>
+                            <input name="group1" type="radio" id="professor" class="right-align" />
+                            <span>Sou Professor</span>
+                        </label>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s6 center-align">
+                <a class="waves-effect waves-light btn-large blue accent-4">Login</a>
+            </div>
+            <div class="col s6 center-align">
+                <a href="tela_inicial.html" class="waves-effect waves-light btn-large red">Cancelar</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, {});
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="../materialize.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>ZP Sys. | Cadastro</title>
+</head>
+
+<body>
+
+        <div class="row">
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo right">Logo</a>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a href="../tela_inicial.html">Início</a></li>
+                        <li><a href="../Salas/relatorio_salas.html">Salas</a></li>
+                        <li><a href="../Salas/reserva_sala.html">Reservar sala</a></li>
+                        <li><a href="../Professores/relatorio_professores.html">Professores</a></li>
+                        <li><a href="../Alunos/relatorio_alunos.html">Alunos</a></li>
+                        <li><a href="../Salas/cadastro_salas.html">Cadastre uma Sala</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+    <div class="container">
+
+        <h3 class="center-align">Cadastre-se</h3>
+
+        <hr>
+
+        <input type="hidden" id="id">
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">person</i>
+                <input placeholder="Nome Completo" type="text" id="nome">
+                <label for="nome">Nome</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">badge</i>
+                <input placeholder="Seu CPF" type="text" id="cpf">
+                <label for="cpf">CPF (Apenas os números)</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">cake</i>
+                <input placeholder="Data de nascimento" type="date" id="dataNascimento">
+                <label for="dataNascimento">Data de Nascimento (DD/MM/AAAA)</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">wc</i>
+                <select id="sexo">
+                    <option value="" disabled selected>Selecione seu sexo</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+                <label>Sexo</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">mail</i>
+                <input placeholder="Seu email" type="text" id="email">
+                <label for="email">e-mail</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                <input placeholder="Telefone" type="text" id="telefone">
+                <label for="telefone">Telefone ((**) 912341234)</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6 center-align">
+                <i class="material-icons prefix">lock</i>
+                <input placeholder="Senha" type="password" id="senha" class="validate">
+                <label for="senha">Senha</label>
+            </div>
+
+            <div class="input-field col s6 center-align">
+                <i class="material-icons prefix">lock</i>
+                <input placeholder="Confirme sua senha" type="password" id="confirma_senha" class="validate">
+                <label for="confirma_senha">Confirme sua Senha</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s6 center-align">
+                <a class="waves-effect waves-light btn-large blue accent-4" onclick="enviarCadastro()">Cadastrar</a>
+            </div>
+            <div class="col s6 center-align">
+                <a href="tela_inicial.html" class="waves-effect waves-light btn-large red">Cancelar</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, {});
+        })
+    </script>
+    <script src="../common.js"></script>
+    <script src="cadastro_professores.js"></script>
+
+</body>
+
+</html>

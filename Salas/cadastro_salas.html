@@ -1,0 +1,110 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="../materialize.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>ZP Sys. | Login</title>
+</head>
+
+<body>
+
+    <div class="row">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Logo</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="tela_inicial.html">Início</a></li>
+                    <li><a href="relatorio_salas.html">Salas</a></li>
+                    <li><a href="reserva_sala.html">Reservar sala</a></li>
+                    <li><a href="relatorio_alunos.html">Alunos</a></li>
+                    <li><a href="relatorio_professores.html">Professores</a></li>
+                </ul>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="login.html">Entre</a></li>
+                    <li><a href="../Alunos/cadastro_alunos.html">Cadastre-se (Alunos)</a></li>
+                    <li><a href="../Alunos/cadastro_professores.html">Cadastre-se (Professores)</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <h3 class="center-align">Cadastre uma sala</h3>
+
+        <hr>
+
+        <input type="hidden" id="id">
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">pin</i>
+                <input type="number" id="numero_sala">
+                <label for="numero_sala">Número da Sala</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">grid_view</i>
+                <input type="number" id="blocoSala">
+                <label for="blocoSala">Bloco</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">local_offer</i>
+                <input type="text" id="apelidoSala">
+                <label for="apelidoSala">Apelido da Sala</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">class</i>
+                <input type="text" id="tipoSala">
+                <label for="tipoSala">Tipo de sala</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">reduce_capacity</i>
+                <input type="number" id="capacidadeSala">
+                <label for="capacidadeSala">Capacidade</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">room_preferences</i>
+                <input type="text" id="situacao">
+                <label for="situacao">Situação da Sala</label>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s6 center-align">
+                <a class="waves-effect waves-light btn-large blue accent-4" onclick="enviarCadastro()">Cadastrar</a>
+            </div>
+            <div class="col s6 center-align">
+                <a href="index.html" class="waves-effect waves-light btn-large red">Cancelar</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, {});
+        });
+    </script>
+    <script src="../common.js"></script>
+    <script src="cadastro_salas.js"></script>
+
+</body>
+
+</html>
