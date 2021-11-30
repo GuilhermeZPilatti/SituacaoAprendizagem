@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Salas VUE</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../materialize.css">
+</head>
+
+<body>
+
+
+
+    <div id="app" class="container">
+
+        <h3 class="center-align">Reserve uma sala</h3>
+
+        <hr>
+
+        <div class="input-field col s6">
+            <i class="material-icons prefix">local_offer</i>
+            <select id="sala">
+                <option value="" disabled selected>Escolha uma sala</option>
+                <option v-for="sala in salas" :value="sala.id">{{sala.apelido}}</option>
+            </select>
+            <label for="sala">Sala</label>
+        </div>
+
+        
+        <div class="input-field col s6">
+            <i class="material-icons prefix">person</i>
+            <select id="professor">
+                <option value="" disabled selected>Selecione o professor</option>
+                <option v-for="professor in professores" :value="professor.id">{{professor.nome}}</option>
+            </select>
+            <label for="professor">Professor</label>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="../common.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                professores: [],
+                salas: []
+            },
+            methods: {
+            },
+            created() {
+                //Buscar salas:
+                fetch(api_url + '/sala', {
+                    method: 'get',
+                    headers: api_headers,
+                    mode: 'cors',
+                })
+                    .then(res => {
+                        if (!res.ok) throw new Error(res.status)
+                        return res.json()
+                    })
+                    .then(data => { this.salas = data.salas })
+                    .then(() => {
+                        var elems = document.querySelectorAll('select');
+                        M.FormSelect.init(elems, {});
+                    })
+                    .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
+
+
+                //Buscar professores:
+                fetch(api_url + '/professor', {
+                    method: 'get',
+                    headers: api_headers,
+                    mode: 'cors',
+                })
+                    .then(res => {
+                        if (!res.ok) throw new Error(res.status)
+                        return res.json()
+                    })
+                    .then(data => { this.professores = data.professores })
+                    .then(() => {
+                        var elems = document.querySelectorAll('select');
+                        M.FormSelect.init(elems, {});
+                    })
+                    .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
+            }
+        })
+    </script>
+
+</body>

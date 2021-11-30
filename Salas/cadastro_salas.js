@@ -5,7 +5,6 @@ const _numero = document.getElementById('numero')
 const _bloco = document.getElementById('bloco')
 const _tipo = document.getElementById('tipo')
 const _apelido = document.getElementById('apelido')
-const _situacao = document.getElementById('situcao')
 
 //-------------------------------------------------------------------------------------------------------
 //Função para enviar o cadastro de professor para a API REST.
@@ -13,11 +12,10 @@ function enviarCadastro() {
 
     let cadastro = {
         id: Number(_id.value),
-        numero: new String(_numero.value),
-        bloco: new String(_bloco.value),
+        numero: Number(_numero.value),
+        bloco: Number(_bloco.value),
         tipo: new String(_tipo.value),
         apelido: new String(_apelido.value),
-        situacao: new String(_situacao.value)
     };
 
     //Validação de dados:
@@ -26,12 +24,8 @@ function enviarCadastro() {
     // (teste lógico) ? (retorno se verdadeiro) : (retorno se falso)
 
     fetch(api_url + '/sala', {
-        method: (cadastro.id > 0) ? 'put' : 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': api_token,
-        },
+        method: (cadastro.id > 0) ? ('put') : ('post'),
+        headers: api_headers,
         mode: 'cors',
         body: JSON.stringify(cadastro)
     })
@@ -45,14 +39,13 @@ function enviarCadastro() {
 
 //-------------------------------------------------------------------------------------------------------
 //Função para preencher o formulário com os dados de um objeto
-function preencheForm(professor) {
-    _id.value = professor.id;
-    _nome.value = professor.nome;
-    _cpf.value = professor.cpf;
-    _dataNascimento.value = professor.dataNascimento;
-    _sexo.value = professor.sexo;
-    _email.value = professor.email;
-    _telefone.value = professor.telefone;
+function preencheForm(sala) {
+    _id.value = sala.id;
+    _numero.value = sala.numero;
+    _bloco.value = sala.bloco;
+    _tipo.value = sala.tipo;
+    _apelido.value = sala.apelido;
+    _situacao.value = sala.situacao;
 
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems, {});
@@ -68,11 +61,7 @@ function recebeCadastroEdicao() {
 
         fetch(api_url + '/sala/' + id, {
             method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': api_token,
-            },
+            headers: api_headers,
             mode: 'cors',
         })
             .then(res => {

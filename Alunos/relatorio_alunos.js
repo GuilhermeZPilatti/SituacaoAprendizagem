@@ -32,11 +32,7 @@ function buscarAlunos() {
 
     fetch(api_url + '/aluno', {
         method: 'get',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': api_token,
-        },
+        headers: api_headers,
         mode: 'cors',
     })
         .then(res => {
@@ -51,11 +47,7 @@ function buscarAlunos() {
 function removerCadastro(idCadastro) {
     fetch(api_url + '/aluno', {
         method: 'delete',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': api_token,
-        },
+        headers: api_headers,
         mode: 'cors',
         body: JSON.stringify({
             id: idCadastro

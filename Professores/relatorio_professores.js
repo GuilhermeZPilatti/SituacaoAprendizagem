@@ -32,11 +32,7 @@ function buscarProfessores() {
 
     fetch(api_url + '/professor', {
         method: 'get',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': api_token,
-        },
+        headers: api_headers,
         mode: 'cors',
     })
         .then(res => {
@@ -51,11 +47,7 @@ function buscarProfessores() {
 function removerCadastro(idCadastro) {
     fetch(api_url + '/professor', {
         method: 'delete',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': api_token,
-        },
+        headers: api_headers,
         mode: 'cors',
         body: JSON.stringify({
             id: idCadastro

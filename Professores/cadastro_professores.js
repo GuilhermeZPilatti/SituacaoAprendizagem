@@ -60,11 +60,7 @@ function enviarCadastro() {
 
     fetch(api_url + '/professor', {
         method: (cadastro.id > 0) ? 'put' : 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': api_token,
-        },
+        headers: api_headers,
         mode: 'cors',
         body: JSON.stringify(cadastro)
     })
@@ -102,11 +98,7 @@ function recebeCadastroEdicao() {
 
         fetch(api_url + '/professor/' + id, {
             method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': api_token,
-            },
+            headers: api_headers,
             mode: 'cors',
         })
             .then(res => {

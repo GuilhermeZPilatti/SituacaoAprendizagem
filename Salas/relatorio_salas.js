@@ -31,11 +31,7 @@ function buscarSalas() {
 
     fetch(api_url + '/sala', {
         method: 'get',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': api_token,
-        },
+        headers: api_headers,
         mode: 'cors',
     })
         .then(res => {
@@ -50,11 +46,7 @@ function buscarSalas() {
 function removerCadastro(idCadastro) {
     fetch(api_url + '/salas', {
         method: 'delete',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': api_token,
-        },
+        headers: api_headers,
         mode: 'cors',
         body: JSON.stringify({
             id: idCadastro
