@@ -20,23 +20,61 @@
 
         <hr>
 
-        <div class="input-field col s6">
-            <i class="material-icons prefix">local_offer</i>
-            <select id="sala">
-                <option value="" disabled selected>Escolha uma sala</option>
-                <option v-for="sala in salas" :value="sala.id">{{sala.apelido}}</option>
-            </select>
-            <label for="sala">Sala</label>
+        <input type="hidden" id="id" v-model="idReserva">
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">notes</i>
+                <input placeholder="Justificativa" type="text" id="justificativa" v-model="justificativaReserva">
+                <label for="justificativa">Justificativa</label>
+            </div>
         </div>
 
-        
-        <div class="input-field col s6">
-            <i class="material-icons prefix">person</i>
-            <select id="professor">
-                <option value="" disabled selected>Selecione o professor</option>
-                <option v-for="professor in professores" :value="professor.id">{{professor.nome}}</option>
-            </select>
-            <label for="professor">Professor</label>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">watch_later</i>
+                <select id="turno" v-model="periodoReserva">
+                    <option value="" disabled selected>Selecione o turno da reserva</option>
+                    <option value="M">Matutino</option>
+                    <option value="V">Vespertino</option>
+                    <option value="N">Noturno</option>
+                </select>
+                <label for="turno">Turno</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">calendar_today</i>
+                <input placeholder="Data" type="date" id="dataReserva" v-model="dataReserva">
+                <label for="dataReserva">Data da Reserva</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">local_offer</i>
+                <select id="sala" v-model="salaReserva">
+                    <option value="" disabled selected>Escolha uma sala</option>
+                    <option v-for="sala in salas" :value="sala">{{sala.apelido}}</option>
+                </select>
+                <label for="sala">Sala</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">person</i>
+                <select id="professor" v-model="professorReserva">
+                    <option value="" disabled selected>Selecione o professor</option>
+                    <option v-for="professor in professores" :value="professor">{{professor.nome}}</option>
+                </select>
+                <label for="professor">Professor</label>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col s12 center-align">
+                <a class="waves-effect waves-light btn-large blue accent-4" v-on:click="cadastrar">Cadastrar</a>
+            </div>
+
         </div>
 
     </div>
@@ -51,9 +89,36 @@
             el: '#app',
             data: {
                 professores: [],
-                salas: []
+                salas: [],
+                idReserva: null,
+                professorReserva: null,
+                salaReserva: null,
+                justificativaReserva: null,
+                dataReserva: null,
+                periodoReserva: null
             },
             methods: {
+                cadastrar() {
+                    let cadastro = {
+                        justificativa: this.justificativaReserva,
+                        dataReserva: this.dataReserva,
+                        periodo: this.periodoReserva,
+                        idProfessor: this.professorReserva.id,
+                        idSala: this.salaReserva.id
+                    }
+
+                    //Reservar Sala:
+                    fetch(api_url + '/reserva', {
+                        method: 'post',
+                        headers: api_headers,
+                        mode: 'cors',
+                        body: JSON.stringify(cadastro)
+                    })
+                        .then(res => { if (!res.ok) throw new Error(res.status) })
+                        .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
+
+                }
+
             },
             created() {
                 //Buscar salas:
