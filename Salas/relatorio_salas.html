@@ -5,55 +5,106 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="../materialize.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!--Import Google Icon Font-->
+    <title>Relatório Salas VUE</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>ZP Sys. | Salas</title>
+    <script src="/componentes/menu.js"></script>
+    <link rel="stylesheet" href="../materialize.css">
 </head>
 
 <body>
 
     <div class="row">
-        <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo right">Logo</a>
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li><a href="../tela_inicial.html">Início</a></li>
-                    <li><a href="../Salas/relatorio_salas.html">Salas</a></li>
-                    <li><a href="../Salas/reserva_sala.html">Reservar sala</a></li>
-                    <li><a href="../Alunos/relatorio_alunos.html">Alunos</a></li>
-                    <li><a href="../Salas/cadastro_salas.html">Cadastre uma Sala</a></li>
-                </ul>
-            </div>
-        </nav>
+        <componente-menu></componente-menu>
     </div>
 
-    <div class="container">
-        <table class="centered ressponsive-table">
-            <thead>
-                <tr>
-                    <th>Número da Sala</th>
-                    <th>ID</th>
-                    <th>Bloco</th>
-                    <th>Apelido</th>
-                    <th>Tipo</th>
-                    <th>Capacidade</th>
-                    <th>Situação</th>
-                    <th>Ações</th>
+    <div id="app" class="container">
+
+        <div>
+            <table class="centered ressponsive-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Número</th>
+                        <th>Bloco</th>
+                        <th>Apelido</th>
+                        <th>Descrição</th>
+                        <th>Capacidade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tr v-for="sala in salas">
+                    <td>{{sala.id}}</td>
+                    <td>{{sala.numero}}</td>
+                    <td>{{sala.bloco}}</td>
+                    <td>{{sala.apelido}}</td>
+                    <td>{{sala.descricaoTipo}}</td>
+                    <td>{{sala.capacidade}}</td>
+                    <td>{{sala.situacao}}</td>
+                    <td>
+                        <i class="material-icons green-text" v-on:click="editar(sala)">create</i>
+                        &emsp;
+                        <i class="material-icons red-text" v-on:click="remover(sala)">delete</i>
+                    </td>
                 </tr>
-            </thead>
-            <tbody id="tabelaSalas"></tbody>
-        </table>
+                <tbody id="tabelaAlunos"></tbody>
+            </table>
+        </div>
+
+        <div class="col s6 center-align">
+            <a href="cadastro_salas.html" class="waves-effect waves-light btn-large red">Cadastrar uma Sala</a>
+        </div>
     </div>
 
-    <script src="../common.js"></script>
-    <script src="relatorio_salas.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="../common.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                salas: []
+            },
+            methods: {
+                editar(sala) {
+                    sessionStorage.setItem('sala', JSON.stringify(sala));
+                    window.location = 'cadastro_salas.html'
+                },
+                remover(sala) {
+                    fetch(api_url + '/salas', {
+                        method: 'delete',
+                        headers: api_headers,
+                        mode: 'cors',
+                        body: JSON.stringify({
+                            id: sala.id
+                        })
+                    })
+                        .then(res => { if (!res.ok) throw new Error(res.status) })
+                        .then(() => this.created())
+                        .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
+                },
+                buscarDados() {
+                    fetch(api_url + '/sala', {
+                        method: 'get',
+                        headers: api_headers,
+                        mode: 'cors',
+                    })
+                        .then(res => {
+                            if (!res.ok) throw new Error(res.status)
+                            return res.json()
+                        })
 
+                        .then(data => { this.salas = data.salas })
+                        .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
+                }
+            },
+
+            created() {
+                this.buscarDados()
+            }
+        })
+
+
+    </script>
 </body>
 
 </html>
