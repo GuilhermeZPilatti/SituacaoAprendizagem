@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Turmas VUE</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="/componentes/menu.js"></script>
+    <link rel="stylesheet" href="../materialize.css">
+</head>
+
+<body>
+
+    <div class="row">
+        <componente-menu></componente-menu>
+    </div>
+
+
+    <div id="app" class="container">
+
+        <h3 class="center-align">Cadastre uma turma</h3>
+
+        <hr>
+
+        <input type="hidden" id="id" v-model="turma.id">
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">pin</i>
+                <input type="text" id="nome_curso" v-model="turma.nome">
+                <label for="nome_curso">Nome do Curso</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">grid_view</i>
+                <input type="date" id="data_turma" v-model="turma.data">
+                <label for="data_turma">Data da Turma</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">local_offer</i>
+                <input type="text" id="apelido_turma" v-model="turma.apelido">
+                <label for="apelido_turma">Apelido da turma</label>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">reduce_capacity</i>
+                <input type="number" id="duracao_turma" v-model="turma.duracao">
+                <label for="duracao_turma">Duração do curso</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s6 center-align">
+                <a class="waves-effect waves-light btn-large blue accent-4" v-on:click="enviar">Cadastrar</a>
+            </div>
+            <div class="col s6 center-align">
+                <a href="relatorio_turmas.html" class="waves-effect waves-light btn-large red">Cancelar</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="../common.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                turma: {
+                    id: null,
+                    nome: null,
+                    data: null,
+                    apelido: null,
+                    duracao: null,
+                }
+            },
+            methods: {
+                enviar() {
+                    fetch(api_url + '/turma', {
+                        method: this.turma.id ? 'put' : 'post',
+                        headers: api_headers,
+                        mode: 'cors',
+                        body: JSON.stringify(this.turma)
+                    })
+                        .then(res => { if (!res.ok) throw new Error(res.status) })
+                        .then(() => window.location = 'relatorio_turmas.html')
+                        .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
+                }
+            },
+            created() {
+
+                if(sessionStorage.getItem('turma')) {
+                    this.turma = JSON.parse(sessionStorage.getItem('turma'))
+                    sessionStorage.removeItem('turma');
+                }
+
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

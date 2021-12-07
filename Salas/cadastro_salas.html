@@ -94,21 +94,32 @@
                 }
             },
             methods: {
-                enviar() {
-                    fetch(api_url + '/sala', {
+                async enviar() {
+                    let response = await fetch(api_url + '/sala', {
                         method: this.sala.id ? 'put' : 'post',
                         headers: api_headers,
                         mode: 'cors',
                         body: JSON.stringify(this.sala)
-                    })
-                        .then(res => { if (!res.ok) throw new Error(res.status) })
-                        .then(() => window.location = 'relatorio_salas.html')
-                        .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
+                    });
+                    
+                    let responseJSON = await response.json();
+                    
+                    if (!response.ok) {
+                        M.toast({ html: 'Problemas com a requisição: ' + responseJSON.status });
+                        return;
+                    }
+
+                    window.location = 'relatorio_salas.html';
+
+
+                    /* .then(res => { if (!res.ok) throw new Error(res.status) })
+                    .then(() => window.location = 'relatorio_salas.html')
+                    .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err })) */
                 }
             },
             created() {
 
-                if(sessionStorage.getItem('sala')) {
+                if (sessionStorage.getItem('sala')) {
                     this.sala = JSON.parse(sessionStorage.getItem('sala'))
                     sessionStorage.removeItem('sala');
                 }

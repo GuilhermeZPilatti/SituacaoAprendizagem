@@ -118,6 +118,7 @@
                         body: JSON.stringify(cadastro)
                     })
                         .then(res => { if (!res.ok) throw new Error(res.status) })
+                        .then(() => window.location = 'relatorio_reservas.html')
                         .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
 
                 }

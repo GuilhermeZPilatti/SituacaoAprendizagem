@@ -1,4 +1,4 @@
-const api_url = 'http://10.1.92.135:3001';
+const api_url = 'https://tempoalerta.com.br/siscad/';
 const api_token = 'AABBCCDDEEFFG';
 
 const api_headers = {
