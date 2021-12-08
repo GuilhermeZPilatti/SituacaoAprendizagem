@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório Turmas VUE</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/main.css">
     <script src="/componentes/menu.js"></script>
     <link rel="stylesheet" href="../materialize.css">
 </head>
@@ -33,8 +34,9 @@
                 </thead>
                 <tr v-for="turma in turmas">
                     <td>{{turma.id}}</td>
-                    <td>{{turma.nome}}</td>
+                    <td>{{turma.nomeCurso}}</td>
                     <td>{{turma.apelido}}</td>
+                    <td>{{turma.anoInicio}}</td>
                     <td>{{turma.duracao}}</td>
                     <td>
                         <i class="material-icons green-text" v-on:click="editar(turma)">create</i>

@@ -8,6 +8,7 @@
     <title>Reserva de Salas VUE</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../materialize.css">
+    <link rel="stylesheet" href="/main.css">
     <script src="/componentes/menu.js"></script>
 </head>
 
@@ -57,7 +58,7 @@
                 <i class="material-icons prefix">local_offer</i>
                 <select id="sala" v-model="salaReserva">
                     <option value="" disabled selected>Escolha uma sala</option>
-                    <option v-for="sala in salas" :value="sala">{{sala.apelido}}</option>
+                    <option v-for="sala in salas" :value="sala.id">{{sala.apelido}}</option>
                 </select>
                 <label for="sala">Sala</label>
             </div>
@@ -66,7 +67,7 @@
                 <i class="material-icons prefix">person</i>
                 <select id="professor" v-model="professorReserva">
                     <option value="" disabled selected>Selecione o professor</option>
-                    <option v-for="professor in professores" :value="professor">{{professor.nome}}</option>
+                    <option v-for="professor in professores" :value="professor.id">{{professor.nome}}</option>
                 </select>
                 <label for="professor">Professor</label>
             </div>
@@ -106,8 +107,8 @@
                         justificativa: this.justificativaReserva,
                         dataReserva: this.dataReserva,
                         periodo: this.periodoReserva,
-                        idProfessor: this.professorReserva.id,
-                        idSala: this.salaReserva.id
+                        idProfessor: this.professorReserva,
+                        idSala: this.salaReserva
                     }
 
                     //Reservar Sala:
