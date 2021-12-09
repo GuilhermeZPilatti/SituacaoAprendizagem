@@ -94,22 +94,17 @@
             data: {
                 professores: [],
                 salas: [],
-                idReserva: null,
-                professorReserva: null,
-                salaReserva: null,
-                justificativaReserva: null,
-                dataReserva: null,
-                periodoReserva: null
+                cadastro: {
+                    idReserva: null,
+                    professorReserva: null,
+                    salaReserva: null,
+                    justificativaReserva: null,
+                    dataReserva: null,
+                    periodoReserva: null
+                }
             },
             methods: {
                 cadastrar() {
-                    let cadastro = {
-                        justificativa: this.justificativaReserva,
-                        dataReserva: this.dataReserva,
-                        periodo: this.periodoReserva,
-                        idProfessor: this.professorReserva,
-                        idSala: this.salaReserva
-                    }
 
                     //Reservar Sala:
                     fetch(api_url + '/reserva', {

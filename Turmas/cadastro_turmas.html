@@ -29,13 +29,13 @@
 
         <div class="row">
             <div class="input-field col s6">
-                <i class="material-icons prefix">pin</i>
+                <i class="material-icons prefix">book</i>
                 <input type="text" id="nome_curso" v-model="turma.nomeCurso">
                 <label for="nome_curso">Nome do Curso</label>
             </div>
 
             <div class="input-field col s6">
-                <i class="material-icons prefix">grid_view</i>
+                <i class="material-icons prefix">today</i>
                 <input type="date" id="data_turma" v-model="turma.anoInicio">
                 <label for="data_turma">Data da Turma</label>
             </div>
@@ -49,15 +49,15 @@
             </div>
 
             <div class="input-field col s6">
-                <i class="material-icons prefix">reduce_capacity</i>
+                <i class="material-icons prefix">calendar_month</i>
                 <input type="number" id="duracao_turma" v-model="turma.duracao">
                 <label for="duracao_turma">Duração do curso</label>
             </div>
         </div>
 
         <div class="row">
-            <div class="col s6 center-align">
-                <a class="waves-effect waves-light btn-large blue accent-4" v-on:click="enviar">Cadastrar</a>
+            <div class="col s12 l6 center-align">
+                <a class="waves-effect waves-light btn-large blue accent-4" v-on:click="enviar">Cadastrar Turma</a>
             </div>
             <div class="col s6 center-align">
                 <a href="relatorio_turmas.html" class="waves-effect waves-light btn-large red">Cancelar</a>
@@ -99,7 +99,7 @@
             },
             created() {
 
-                if(sessionStorage.getItem('turma')) {
+                if (sessionStorage.getItem('turma')) {
                     this.turma = JSON.parse(sessionStorage.getItem('turma'))
                     sessionStorage.removeItem('turma');
                 }
