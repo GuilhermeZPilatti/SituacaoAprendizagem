@@ -24,12 +24,12 @@
 
         <hr>
 
-        <input type="hidden" id="id" v-model="idReserva">
+        <input type="hidden" id="id" v-model="cadastro.idReserva">
 
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">notes</i>
-                <input placeholder="Justificativa" type="text" id="justificativa" v-model="justificativaReserva">
+                <input placeholder="Justificativa" type="text" id="justificativa" v-model="cadastro.justificativa">
                 <label for="justificativa">Justificativa</label>
             </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">watch_later</i>
-                <select id="turno" v-model="periodoReserva">
+                <select id="turno" v-model="cadastro.periodo">
                     <option value="" disabled selected>Selecione o turno da reserva</option>
                     <option value="M">Matutino</option>
                     <option value="V">Vespertino</option>
@@ -48,7 +48,7 @@
 
             <div class="input-field col s6">
                 <i class="material-icons prefix">calendar_today</i>
-                <input placeholder="Data" type="date" id="dataReserva" v-model="dataReserva">
+                <input placeholder="Data" type="date" id="dataReserva" v-model="cadastro.dataReserva">
                 <label for="dataReserva">Data da Reserva</label>
             </div>
         </div>
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">local_offer</i>
-                <select id="sala" v-model="salaReserva">
+                <select id="sala" v-model="cadastro.idSala">
                     <option value="" disabled selected>Escolha uma sala</option>
                     <option v-for="sala in salas" :value="sala.id">{{sala.apelido}}</option>
                 </select>
@@ -65,7 +65,7 @@
 
             <div class="input-field col s6">
                 <i class="material-icons prefix">person</i>
-                <select id="professor" v-model="professorReserva">
+                <select id="professor" v-model="cadastro.idProfessor">
                     <option value="" disabled selected>Selecione o professor</option>
                     <option v-for="professor in professores" :value="professor.id">{{professor.nome}}</option>
                 </select>
@@ -96,11 +96,11 @@
                 salas: [],
                 cadastro: {
                     idReserva: null,
-                    professorReserva: null,
-                    salaReserva: null,
-                    justificativaReserva: null,
+                    idProfessor: null,
+                    idSala: null,
+                    justificativa: null,
                     dataReserva: null,
-                    periodoReserva: null
+                    periodo: null
                 }
             },
             methods: {
@@ -108,10 +108,10 @@
 
                     //Reservar Sala:
                     fetch(api_url + '/reserva', {
-                        method: 'post',
+                        method: (this.cadastro.id) ? 'put' : 'post',
                         headers: api_headers,
                         mode: 'cors',
-                        body: JSON.stringify(cadastro)
+                        body: JSON.stringify(this.cadastro)
                     })
                         .then(res => { if (!res.ok) throw new Error(res.status) })
                         .then(() => window.location = 'relatorio_reservas.html')
@@ -121,6 +121,12 @@
 
             },
             created() {
+
+                if (sessionStorage.getItem('reserva')) {
+                    this.cadastro = JSON.parse(sessionStorage.getItem('reserva'));
+                    sessionStorage.removeItem('reserva');
+                }
+
                 //Buscar salas:
                 fetch(api_url + '/sala', {
                     method: 'get',

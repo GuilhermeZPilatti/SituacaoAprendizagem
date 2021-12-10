@@ -71,7 +71,7 @@
                     window.location = 'cadastro_salas.html'
                 },
                 remover(sala) {
-                    fetch(api_url + '/salas', {
+                    fetch(api_url + '/sala', {
                         method: 'delete',
                         headers: api_headers,
                         mode: 'cors',
@@ -80,7 +80,7 @@
                         })
                     })
                         .then(res => { if (!res.ok) throw new Error(res.status) })
-                        .then(() => this.created())
+                        .then(() => this.buscarDados())
                         .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
                 },
                 buscarDados() {

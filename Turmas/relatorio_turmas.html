@@ -68,7 +68,7 @@
                     window.location = 'cadastro_turmas.html'
                 },
                 remover(turma) {
-                    fetch(api_url + '/turmas', {
+                    fetch(api_url + '/turma', {
                         method: 'delete',
                         headers: api_headers,
                         mode: 'cors',
@@ -77,7 +77,7 @@
                         })
                     })
                         .then(res => { if (!res.ok) throw new Error(res.status) })
-                        .then(() => this.created())
+                        .then(() => this.buscarDados())
                         .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
                 },
                 buscarDados() {

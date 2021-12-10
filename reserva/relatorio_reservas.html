@@ -71,7 +71,7 @@
                 },
 
                 remover(reserva) {
-                    fetch(api_url + '/reservas', {
+                    fetch(api_url + '/reserva', {
                         method: 'delete',
                         headers: api_headers,
                         mode: 'cors',
@@ -80,7 +80,7 @@
                         })
                     })
                         .then(res => { if (!res.ok) throw new Error(res.status) })
-                        .then(() => this.created())
+                        .then(() => this.buscarDados())
                         .catch(err => M.toast({ html: 'Problemas com a requisição: ' + err }))
                 },
 

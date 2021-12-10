@@ -43,9 +43,9 @@
 
         <div class="row">
             <div class="input-field col s6">
-                <i class="material-icons prefix">local_offer</i>
-                <input type="text" id="apelidoSala" v-model="sala.apelido">
-                <label for="apelidoSala">Apelido da Sala</label>
+                <i class="material-icons prefix">reduce_capacity</i>
+                <input type="number" id="capacidadeSala" v-model="sala.capacidade">
+                <label for="capacidadeSala">Capacidade</label>
             </div>
 
             <div class="input-field col s6">
@@ -56,10 +56,10 @@
         </div>
 
         <div class="row">
-            <div class="input-field col s6">
-                <i class="material-icons prefix">reduce_capacity</i>
-                <input type="number" id="capacidadeSala" v-model="sala.capacidade">
-                <label for="capacidadeSala">Capacidade</label>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">local_offer</i>
+                <input type="text" id="apelidoSala" v-model="sala.apelido">
+                <label for="apelidoSala">Apelido da Sala</label>
             </div>
         </div>
 
